@@ -1,13 +1,18 @@
 
 import { DatabaseContext } from "../context/DatabaseContext";
 import React, { useContext} from "react";
+import {HiMenuAlt4} from 'react-icons/hi';
+import {AiOutlineClose} from 'react-icons/ai'
+import logo from '../../images/blockchain.png';
+
+import {  Link } from 'react-router-dom';
 
 
 
 
 
 const Welcome =()=>{
-    const {n,m,d,i,g,connectWallet,connectedAccount,test,settest,test1,settest1,test2,settest2,getCount1,handleChange1,Fullname,addstudent,handleChange2,handleChange3,handleChange4,handleChange5,studentID,DOB,GPA,major,count,test3,settest3,FullnameR,getstudent,handleChange7} = useContext(DatabaseContext);
+    const {n,m,d,i,g,connectWallet,connectedAccount,test,settest,test1,settest1,test2,settest2,getCount1,handleChange1,Fullname,addstudent,handleChange2,handleChange3,handleChange4,handleChange5,studentID,DOB,GPA,major,count,test3,settest3,FullnameR,getstudent,handleChange7,settest4,test4,names,handleChange8,deleteStudent,updateStudent,handleChange9,handleChange10,handleChange11,name1,gpa1,major1,test5,settest5,setall,all,keys,handleChange12,getAllstudent} = useContext(DatabaseContext);
     
 const a=1;
 
@@ -26,6 +31,22 @@ alert(studentID,);
     alert("success");
 
 }
+
+
+const handleSubmit4 = (e)=>{
+ 
+  
+  
+      e.preventDefault();
+  
+      if(!names){ alert("please fill out all field"); return;}
+  
+      deleteStudent();
+  
+      alert("success");
+  
+  }
+
 
 const handleSubmit1 = (e)=>{
  
@@ -46,6 +67,34 @@ const handleSubmit1 = (e)=>{
   
   }
 
+
+
+const handleSubmit10 = (e)=>{
+ 
+  if(!name1){ alert("please Enter name of student you wish to update"); return;}
+
+  if(!gpa1 && !major1){alert("no information entered"); return;}
+ updateStudent();
+
+   
+    
+ 
+
+}
+
+const handleSubmit11 = (e)=>{
+ 
+  if(!keys){ alert("No student"); return;}
+
+  
+getAllstudent();
+
+   
+    
+ 
+
+}
+
     
     const addinput=()=>{
        
@@ -57,7 +106,9 @@ const handleSubmit1 = (e)=>{
             settest("yes")
             settest1(null)
             settest2(null);
+            settest5(null)
             settest3(null);
+            settest4(null);
         }
 
        
@@ -73,6 +124,8 @@ const handleSubmit1 = (e)=>{
             settest(null)
             settest3(null);
             settest2(null)
+            settest5(null)
+            settest4(null);
             settest1("yes")
         }
 
@@ -89,11 +142,31 @@ const handleSubmit1 = (e)=>{
             settest1(null)
             settest3(null);
             settest(null)
+            settest4(null);
+            settest5(null)
             settest2("yes")
         }
 
        
     }
+
+    const addinput4=()=>{
+       
+      if(test4=="yes"){
+      settest4(null);   }
+
+      else{
+
+          settest1(null)
+          settest3(null);
+          settest(null)
+          settest2(null)
+          settest5(null)
+          settest4("yes")
+      }
+
+     
+  }
 
     const addinput3=()=>{
       getCount1();
@@ -106,11 +179,31 @@ const handleSubmit1 = (e)=>{
           settest1(null)
           settest(null)
           settest2(null)
+          settest4(null);
+          settest5(null)
           settest3("yes")
       }
 
-     
   }
+  const addinput5=()=>{
+    getAllstudent();
+
+    if(test5=="yes"){
+    settest5(null);   }
+
+    else{
+
+        settest1(null)
+        settest(null)
+        settest2(null)
+        settest4(null);
+        settest5("yes")
+    }
+
+}
+
+
+  
     
     
 
@@ -145,9 +238,11 @@ const handleSubmit1 = (e)=>{
 
              </button>)}
 
+    
+
        {connectedAccount &&(
-             <button ype="button"  className="  bg-[#2952e3]   rounded-full curser-pointer hover:bg-[#2546bd] p-4 mt-8">
-           Retrieve All student        
+             <button ype="button" onClick={addinput4} className="  bg-[#2952e3]   rounded-full curser-pointer hover:bg-[#2546bd] p-4 mt-8">
+           Delete student        
 
              </button>)}
 
@@ -160,13 +255,21 @@ const handleSubmit1 = (e)=>{
              </button>
 )}
 
+{connectedAccount &&(
+             <button ype="button" onClick={addinput2}  className="  bg-[#2952e3]   rounded-full curser-pointer hover:bg-[#2546bd] p-4 mt-8">
+          UpdateStudent
+
+
+
+             </button>
+)}
+
 
 
 
 {connectedAccount &&(
-             <button ype="button" onClick={addinput2} className="  bg-[#2952e3]   rounded-full curser-pointer hover:bg-[#2546bd] p-4 mt-8">
-           Edit student info
-
+             <button ype="button" onClick={addinput5} className="  bg-[#2952e3]   rounded-full curser-pointer hover:bg-[#2546bd] p-4 mt-8">
+             Students
              </button>
 )}
 
@@ -213,28 +316,28 @@ const handleSubmit1 = (e)=>{
 
    </h1>
 
-
-
-
-
-
-
-
-
-
-
   )}
 </div>
 
+<div className="flex justify-left mt-8  ml-5"  >
+                  {test5 &&   (
+            <p className="text-white">{[keys]}</p> 
+                  )}
+             </div>
 
 
-
-
-             
 
              <div className="flex justify-center mt-8  ml-5"  >
                   {test &&   (
                 <input type="text" name="fullna" placeholder="Fullname"  onChange={handleChange1}/>
+                  )}
+             </div>
+
+
+
+             <div className="flex justify-center mt-8  ml-5"  >
+                  {test4 &&   (
+                <input type="text" name="name" placeholder="Fullname"  onChange={handleChange8}/>
                   )}
              </div>
 
@@ -292,15 +395,14 @@ submit
              </div>
 
 
+             <div className="flex justify-center text-white">
+             {test4 && (
+              
+              <button ype="button" onClick={handleSubmit4}  className="  bg-[#2952e3]   rounded-full curser-pointer hover:bg-[#2546bd] p-4 mt-8 flex justify-end">
+submittt
+              </button>
+              
 
-
-
-
-
-
-             <div className="flex justify-center  mb-8" >
-             {test2 && (
-                <input type="text" name="nameE" placeholder="student's name " />
              )}
              </div>
 
@@ -310,11 +412,37 @@ submit
 
 
 
+<div className="mb-20">
+             <div className="flex justify-center mt-8  ml-5"  >
+                  {test2 &&   (
+                <input type="text" name="key" placeholder="Fullname"  onChange={handleChange9}/>
+                  )}
+             </div>
+
+
+             <div className="flex justify-center mt-8  ml-5"  >
+                  {test2 &&   (
+                <input type="number" name="name" placeholder="Update GPA"  onChange={handleChange10}/>
+                  )}
+             </div>
+
+             <div className="flex justify-center mt-8  ml-5"  >
+                  {test2 &&   (
+                <input type="text" name="name" placeholder="Update Major"  onChange={handleChange11}/>
+                  )}
+             </div>
+
+             </div>
+
+
+
+
+
 
              <div className="flex justify-center text-white">
              {test2 && (
               
-              <button ype="button" onClick={getCount1}  className="  bg-[#2952e3]   rounded-full curser-pointer hover:bg-[#2546bd] p-4 mt-8 flex justify-end">
+              <button ype="button" onClick={handleSubmit10}  className="  bg-[#2952e3]   rounded-full curser-pointer hover:bg-[#2546bd] p-4 mt-8 flex justify-end">
 submit
               </button>
               

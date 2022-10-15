@@ -7,6 +7,7 @@ import Ben from "./Ben"
 import Contact from "./Contact"
 import Help from "./Help"
 import Learn from "./Learn"
+import  Student from "./Student"
 
 const App =()=> {
  
@@ -29,6 +30,7 @@ const App =()=> {
  <Route  path="/Contact" element={<Contact/>}/>
  <Route  path="/Help" element={<Help/>}/>
  <Route  path="/Learn" element={<Learn/>}/>
+ <Route  path="/Student" element={<Student/>}/>
  
  
  </Routes>
